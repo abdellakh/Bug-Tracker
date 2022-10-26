@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js --ignore 'uploads/*' --ignore 'tests/*' --ignore 'node_modules/*' --ignore 'scripts/*'",
+    "start": "SET TOKEN_SECRET = '1234567890' set DB_PASSWORD = 'uzA%3FsmMQ37QAU%26NV' set DB_USER = root"
+  },
+  "author": "Abdellah Khouya",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.1.4",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.15",
+    "uuid": "^3.3.3",
+    "ws": "^7.2.1"
+  }
+}
