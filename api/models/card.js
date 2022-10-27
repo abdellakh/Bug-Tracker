@@ -9,9 +9,24 @@ const CardSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  label:{
+    type : String,
+  },
   description: {
     type: String,
   },
+  status: {
+    type: Schema.Types.ObjectID,
+    ref: "Status"
+  },
+  // period: {
+  //   start: {
+  //     type: Date
+  //   },
+  //   end: {
+  //     type : Date
+  //   }
+  // },
   comments: [
     {
       content: {
@@ -26,6 +41,13 @@ const CardSchema = mongoose.Schema({
         type: Date,
         default: () => new Date(), // ? Set function as default value, and not just new Date(), or it will set the new Date() at the moment of required by the route !
       },
+      attachements: [
+        {
+          attachement: {
+            type: Schema.Types.ObjectID,
+          },
+        },
+      ]
     },
   ],
   subtasks: [
@@ -35,13 +57,13 @@ const CardSchema = mongoose.Schema({
       },
     },
   ],
-  files: [
+  attachements: [
     {
-      file: {
+      attachement: {
         type: Schema.Types.ObjectID,
       },
     },
-  ],
+  ]
 });
 
 module.exports = mongoose.model("Cards", CardSchema);

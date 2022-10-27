@@ -12,7 +12,7 @@ let connectDB = async () => {
   };
   await mongoose
     .connect(
-      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWD}@cluster0.kziyxae.mongodb.net/test`,
+      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.suxewcm.mongodb.net/test`,
       options
     )
     .then(() => {

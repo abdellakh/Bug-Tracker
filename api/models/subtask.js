@@ -11,6 +11,18 @@ const SubTaskSchema = mongoose.Schema({
   description: {
     type: String,
   },
+  status: {
+    type: Schema.Types.ObjectID,
+    ref: "Status"
+  },
+  // period: {
+  //   start: {
+  //     type: Date
+  //   },
+  //   end: {
+  //     type : Date
+  //   }
+  // },
   comments: [
     {
       content: {
@@ -27,6 +39,13 @@ const SubTaskSchema = mongoose.Schema({
       },
     },
   ],
+  attachements: [
+    {
+      attachement: {
+        type: Schema.Types.ObjectID,
+      },
+    },
+  ]
 });
 
 module.exports = mongoose.module("Subtasks", SubTaskSchema);

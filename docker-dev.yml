@@ -1,0 +1,39 @@
+version: "3.4"
+
+services:
+  api:
+    restart: always
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    working_dir: /app
+    environment:
+      NODE_ENV: development
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      TOKEN_SECRET: ${TOKEN_SECRET}
+    command: npm run dev
+    ports:
+      - 5000:5000
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - "./mongo_data:/data/db"
+    logging:
+      driver: none
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_NAME}

@@ -1,12 +1,11 @@
 {
-  "name": "api",
+  "name": "bug_tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "App.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js --ignore 'uploads/*' --ignore 'tests/*' --ignore 'node_modules/*' --ignore 'scripts/*'",
-    "start": "SET TOKEN_SECRET = '1234567890' set DB_PASSWORD = 'uzA%3FsmMQ37QAU%26NV' set DB_USER = root"
+    "dev": "nodemon app.js --ignore 'uploads/*' --ignore 'tests/*' --ignore 'node_modules/*' --ignore 'scripts/*'"
   },
   "author": "Abdellah Khouya",
   "license": "ISC",

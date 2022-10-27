@@ -4,7 +4,6 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-
 RUN apt-get upgrade
 
 RUN \
@@ -14,9 +13,9 @@ RUN \
 
 RUN ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
 
-
 # Install node
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+
 RUN apt-get install nodejs -y
 
 RUN npm install -g nodemon
