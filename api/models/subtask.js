@@ -39,9 +39,9 @@ const SubTaskSchema = mongoose.Schema({
       },
     },
   ],
-  attachements: [
+  files: [
     {
-      attachement: {
+      file: {
         type: Schema.Types.ObjectID,
       },
     },

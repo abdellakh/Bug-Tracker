@@ -1,75 +1,137 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
+    <v-col cols="4">
+      <v-card class="pa-2">
         <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
+          <v-container>
+            <v-row>
+              <v-col cols="6">
+                <v-btn
+                  depressed
+                  block
+                  color="secondary"
+                  :outlined="register_mode"
+                  @click="register_mode ? switch_mode() : null"
+                >
+                  Connexion
+                </v-btn>
+              </v-col>
+              <v-col cols="6">
+                <v-btn
+                  depressed
+                  block
+                  color="secondary"
+                  :outlined="!register_mode"
+                  @click="!register_mode ? switch_mode() : null"
+                >
+                  Inscription
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+          <!-- <v-spacer />
+          <v-switch v-model="register_mode" color="grey" inset></v-switch>
+          <v-spacer /> -->
+        </v-card-actions>
+        <v-card-actions>
+          <v-container>
+            <v-row class="text-xs-right">
+              <v-spacer />
+              <v-col cols="8 " class="text-md-center">
+                <em>
+                  <small color="info">
+                    {{
+                      register_mode
+                        ? "Saisissez les informations requises et envoyez pour continuer."
+                        : "Saisissez votre adresse email et votre mot de passe pour continuer."
+                    }}
+                  </small>
+                </em>
+              </v-col>
+              <v-spacer />
+            </v-row>
+            <v-row class="creds">
+              <v-container>
+                <v-row>
+                  <v-col cols="6">
+                    <v-text-field
+                      v-if="register_mode"
+                      type="text"
+                      v-model="user.informations.firstname"
+                      label="Nom"
+                      placeholder="White"
+                      outlined
+                    ></v-text-field
+                  ></v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      v-if="register_mode"
+                      type="text"
+                      v-model="user.informations.lastname"
+                      label="Prénom"
+                      placeholder="Walter"
+                      outlined
+                    ></v-text-field
+                  ></v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="6">
+                    <v-text-field
+                      v-if="register_mode"
+                      type="text"
+                      v-model="user.credentials.username"
+                      label="Prénom"
+                      placeholder="Walter"
+                      outlined
+                    ></v-text-field
+                  ></v-col>
+                  <v-col :cols="register_mode ? 6 : 12">
+                    <v-text-field
+                      type="email"
+                      v-model="user.credentials.email"
+                      label="Adress mail"
+                      placeholder="exemple@gmail.com"
+                      outlined
+                    ></v-text-field
+                  ></v-col>
+                </v-row>
+                <v-row>
+                  <v-col :cols="register_mode ? 6 : 12">
+                    <v-text-field
+                      type="password"
+                      v-model="user.credentials.password"
+                      label="Mot de passe"
+                      placeholder="********"
+                      outlined
+                    ></v-text-field
+                  ></v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      v-if="register_mode"
+                      type="password"
+                      v-model="user.conf_password"
+                      label="Confiramtion du mot de passe"
+                      placeholder="********"
+                      outlined
+                    ></v-text-field
+                  ></v-col>
+                </v-row>
+              </v-container>
+            </v-row>
+            <v-row>
+              <v-spacer />
+              <v-col cols="6">
+                <v-btn
+                  block
+                  color="primary"
+                  @click="register_mode ? register() : login()"
+                >
+                  {{ register_mode ? "S'inscrire" : "Se connecter" }}
+                </v-btn></v-col
+              >
+              <v-spacer />
+            </v-row>
+          </v-container>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -77,7 +139,85 @@
 </template>
 
 <script>
+const Cookie = process.client ? require("js-cookie") : undefined;
 export default {
-  name: 'IndexPage'
-}
+  name: "IndexPage",
+  data: () => {
+    return {
+      register_mode: false,
+      user: {
+        informations: {
+          firstName: "",
+          lastName: "",
+        },
+        credentials: {
+          username: "",
+          email: "",
+          password: "",
+        },
+        conf_password: "",
+      },
+      rules: {
+        string: [
+          (value) => (value || "").trim().length || "Champ obligatoire !",
+        ],
+      },
+    };
+  },
+  // mounted: function () {
+  //   if (this.$store.state && this.$store.state.auth) {
+  //     this.$router.push("/dashboard");
+  //   }
+  // },
+  methods: {
+    switch_mode() {
+      this.register_mode = !this.register_mode;
+    },
+    login() {
+      this.$post("/login", { credentials: this.user.credentials })
+        .then((res) => {
+          if (res.data.success) {
+            this.$store.commit("setAuth", res.data);
+            Cookie.set("auth", res.data);
+            this.$router.push("/dashboard");
+          } else {
+            this.$notify({
+              title: "Error occured",
+              text: res.data.message,
+              type: "error",
+              showAnimation: "slideDown",
+            });
+          }
+        })
+        .catch((error) => {
+          this.$notify({
+            title : "Error Occured",
+            text : error.message,
+            type : "error",
+            showAnimation: "slideDown"
+          })
+        });
+    },
+    register() {
+      this.user.credentials.password == this.user.conf_password &&
+        this.$post("/signup", {
+          credentials: this.user.credentials,
+          informations: this.user.informations,
+        })
+          .then((res) => {
+            if(res.data.success) {
+              this.login();
+            }
+          })
+          .catch((error) => {
+            this.$notify({
+              title : "Error Occured",
+              text : error.message,
+              type: "error",
+              showAnimation: "slideDown"
+            })
+          });
+    },
+  },
+};
 </script>

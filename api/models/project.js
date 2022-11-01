@@ -25,7 +25,7 @@ const ProjectSchema = mongoose.Schema({
   ],
   author: {
     type: Schema.types.ObjectID,
-    ref: "Users",
+    ref: "User",
   }
 });
 

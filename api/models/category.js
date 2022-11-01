@@ -11,7 +11,7 @@ const CategorySchema = mongoose.Schema({
     },
     author : {
         type : Schema.Types.ObjectID,
-        ref: "Users"
+        ref: "User"
     },
     cards : [{
         card : {

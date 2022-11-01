@@ -41,9 +41,9 @@ const CardSchema = mongoose.Schema({
         type: Date,
         default: () => new Date(), // ? Set function as default value, and not just new Date(), or it will set the new Date() at the moment of required by the route !
       },
-      attachements: [
+      files: [
         {
-          attachement: {
+          file : {
             type: Schema.Types.ObjectID,
           },
         },
@@ -57,9 +57,9 @@ const CardSchema = mongoose.Schema({
       },
     },
   ],
-  attachements: [
+  files: [
     {
-      attachement: {
+      file : {
         type: Schema.Types.ObjectID,
       },
     },
