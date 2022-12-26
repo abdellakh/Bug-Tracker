@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema
 
-const SubTaskSchema = mongoose.Schema({
+const SubTaskSchema = Schema({
   created_at: {
     type: Date,
     default: Date.now,

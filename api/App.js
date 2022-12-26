@@ -48,3 +48,11 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use("/", require("./routes/register"))
+app.use("/", require("./routes/user"))
+app.use("/", require("./routes/carte"))
+app.use("/", require("./routes/category"))
+app.use("/", require("./routes/file"))
+app.use("/", require("./routes/security"))
+app.use("/", require("./routes/register"))

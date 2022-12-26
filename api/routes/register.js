@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require("../models/users");
+const User = require("../models/user");
 const { debug } = require("../modules/dumper");
 const tokinit = require("../modules/tokinit");
 
@@ -9,6 +9,7 @@ const file = "register.js";
 
 // Users Registration
 router.post("/signup", async (req, res) => {
+  debug('route signup',false,'signup')
   const location = `${file} : post "/signup"`;
   // ? CHECK IF EMAIL EXISTS
   let check_email = await User.findOne({ email: req.body.email });
@@ -47,13 +48,13 @@ router.post("/signup", async (req, res) => {
     let token = jwt.sign(
       {
         user: {
-          email: created.credentials.email,
-          loginToken: created.credentials.loginToken,
-          username: created.credentials.username,
-          emailValidated: created.account.emailValidation.status,
-          createdAt: created.account.createdAt,
-          role: created.account.role,
-          id: created._id,
+          email: user.credentials.email,
+          loginToken: user.credentials.loginToken,
+          username: user.credentials.username,
+          emailValidated: user.account.emailValidation.status,
+          createdAt: user.account.createdAt,
+          role: user.account.role,
+          id: user._id,
         },
       },
       process.env.TOKEN_SECRET,
@@ -61,20 +62,21 @@ router.post("/signup", async (req, res) => {
     );
 
     return res.status(201).json({
-      created_id: created._id,
+      created_id: user._id,
       success: true,
-      message: "Youre account has been created successfully",
+      message: "Youre account has been user successfully",
       token: token,
       user: {
-        email: created.credentials.email,
-        loginToken: created.credentials.loginToken,
-        username: created.credentials.username,
-        emailValidated: created.account.emailValidation.status,
-        createdAt: created.account.createdAt,
-        role: created.account.role,
+        email: user.credentials.email,
+        loginToken: user.credentials.loginToken,
+        username: user.credentials.username,
+        emailValidated: user.account.emailValidation.status,
+        createdAt: user.account.createdAt,
+        role: user.account.role,
       },
     });
   } catch (error) {
+    console.log('route signup / catch')
     debug(error, false, location);
     return res.status(500).json({
       success: false,
@@ -200,10 +202,10 @@ router.post("/loginGuest", async (req, res) => {
       message: "You are successfully logged in",
       token: token,
       user: {
-        email: created.credentials.email,
-        username: created.credentials.username,
-        createdAt: created.account.createdAt,
-        role: created.account.role,
+        email: user.credentials.email,
+        username: user.credentials.username,
+        createdAt: user.account.createdAt,
+        role: user.account.role,
       },
     });
   } catch (error) {
@@ -211,4 +213,5 @@ router.post("/loginGuest", async (req, res) => {
     return;
   }
 });
+
 module.exports = router;

@@ -36,7 +36,6 @@ export default ({ store }, inject) => {
             },
             onUploadProgress: progressCallback,
           };
-
       return new Promise((resolve, reject) => {
         axios
           .post(process.env.api_uri + route, body, headers)

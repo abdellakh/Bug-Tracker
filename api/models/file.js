@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
 const fs = require("fs")
+const Schema = mongoose.Schema
 
-const FileSchema = mongoose.Schema({
+const FileSchema = Schema({
     created_at : {
         type : Date,
         default: Date.now

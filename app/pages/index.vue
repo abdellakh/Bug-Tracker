@@ -57,8 +57,8 @@
                     <v-text-field
                       v-if="register_mode"
                       type="text"
-                      v-model="user.informations.firstname"
-                      label="Nom"
+                      v-model="user.informations.firstName"
+                      label="First Name"
                       placeholder="White"
                       outlined
                     ></v-text-field
@@ -67,24 +67,24 @@
                     <v-text-field
                       v-if="register_mode"
                       type="text"
-                      v-model="user.informations.lastname"
-                      label="Prénom"
+                      v-model="user.informations.lastName"
+                      label="Last Name"
                       placeholder="Walter"
                       outlined
                     ></v-text-field
                   ></v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="6">
+                  <v-col>
                     <v-text-field
-                      v-if="register_mode"
                       type="text"
-                      v-model="user.credentials.username"
-                      label="Prénom"
-                      placeholder="Walter"
+                      v-model="user.credentials.userName"
+                      label="Username"
+                      placeholder="UserName"
                       outlined
-                    ></v-text-field
-                  ></v-col>
+                    >
+                    </v-text-field>
+                  </v-col>
                   <v-col :cols="register_mode ? 6 : 12">
                     <v-text-field
                       type="email"
@@ -151,7 +151,7 @@ export default {
           lastName: "",
         },
         credentials: {
-          username: "",
+          userName: "",
           email: "",
           password: "",
         },
@@ -191,33 +191,42 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            title : "Error Occured",
-            text : error.message,
-            type : "error",
-            showAnimation: "slideDown"
-          })
+            title: "Error Occured",
+            text: error.message,
+            type: "error",
+            showAnimation: "slideDown",
+          });
         });
     },
     register() {
-      this.user.credentials.password == this.user.conf_password &&
-        this.$post("/signup", {
-          credentials: this.user.credentials,
-          informations: this.user.informations,
+      console.log("alo alo");
+      // if (this.user.credentials.password != this.user.conf_password) {
+      //   this.$notify({
+      //     title: "Error Password",
+      //     text: "Your password and the confirmation password are not the same. Please try again.",
+      //     type: "Error",
+      //     showAnimation: "slideDown",
+      //   });
+      // } else {
+      this.$post("/signup", {
+        credentials: this.user.credentials,
+        informations: this.user.informations,
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.login();
+          }
         })
-          .then((res) => {
-            if(res.data.success) {
-              this.login();
-            }
-          })
-          .catch((error) => {
-            this.$notify({
-              title : "Error Occured",
-              text : error.message,
-              type: "error",
-              showAnimation: "slideDown"
-            })
+        .catch((error) => {
+          this.$notify({
+            title: "Error Occured",
+            text: error.message,
+            type: "error",
+            showAnimation: "slideDown",
           });
+        });
     },
   },
+  //},
 };
 </script>
